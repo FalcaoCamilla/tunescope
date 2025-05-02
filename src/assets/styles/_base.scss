@@ -13,3 +13,34 @@ html, body {
   box-sizing: border-box;
   background-color: $gray-600;
 }
+
+.div-wrapper-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  input {
+    flex: 1; //ocupar todo o espaço disponível**
+    padding-right: 2.25rem;
+  }
+
+  button {
+    position: absolute;
+    right: 10px;
+    top: 45%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 8px;
+  }
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
