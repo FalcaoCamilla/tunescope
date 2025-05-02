@@ -1,0 +1,38 @@
+<div class="main">
+  <div class="branding">
+    <img src="assets/images/logo-tunescope.png" alt="">
+  </div>
+  <div class="login-container">
+    <div class="signin-div">
+      <h1>Sign in</h1>
+      <p class="login-message">Welcome! Please enter your credentials to access your account.</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="input-group">
+        <label for="username">Username:</label>
+        <input type="text" formControlName="username" id="username" name="username" required>
+      </div>
+      <div class="input-group">
+        <label for="password">Password:</label>
+        <div class="password-wrapper">
+          <input [type]="showPassword() ? 'text' : 'password'" formControlName="password" id="password" required>
+          <button 
+            type="button"
+            class="toggle-password" 
+            (click)="showPassword.set(!showPassword())"
+          >
+            <img 
+              [src]="showPassword() ? 'assets/icons/eye-close-fill.svg' : 'assets/icons/eye-fill.svg'" 
+              alt="Toggle Password Visibility"
+            >
+          </button>
+        </div>
+      </div>
+      <div class="button-wrapper">
+        <p class="singup-text">Don't have an account? <a>Sign up</a></p>
+        <button type="submit">Login</button>
+      </div>
+    </form>
+  </div>
+</div>

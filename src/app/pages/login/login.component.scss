@@ -1,0 +1,144 @@
+
+@import 'base';
+
+:host {
+  @include flex-center();
+  height: 100%;
+}
+
+.main {
+  @include flex-row(center, center);
+  width: 100%;
+  height: 100%;
+
+  .branding,
+  .login-container {
+    @include flex-center();
+    flex: 1;
+    height: 100%;
+  }
+
+  .branding {
+    background: $primary-200;
+    background: radial-gradient(circle, $primary-200 0%, $primary-400 75%);
+
+    img {
+      width: 50%;
+      opacity: 0.8;
+    }
+  }
+
+  .login-container {
+    @include flex-column(center, center);
+    background-color: rgba(73, 80, 87, 0.188);
+    padding: 0 2.5rem;
+
+    .signin-div {
+      color: $white;
+    }
+
+    form {
+      width: 100%;
+      height: 50%;
+      box-sizing: border-box;
+  
+      .input-group {
+        @include flex-column(center, flex-start);
+        width: 100%;
+    
+        input {
+          width: 100%;
+          box-sizing: border-box;
+          padding: $padding-large;
+          margin-bottom: $margin-medium;
+          border: none;
+          border-radius: $border-radius-large;
+          font-size: $font-size-medium;
+          color: $white;
+          background: $gray-500;
+          transition: margin-top 0.3s ease, 
+                      border-color 0.3s ease, 
+                      box-shadow 0.3s ease;
+    
+          &:focus {
+            margin-top: $margin-small;
+            border-color: $gray-100;
+            box-shadow: $box-shadow-input;
+            outline: none;
+          }
+        }
+    
+        label {
+          font-size: $font-size-small;
+          color: $white;
+          transition: color 0.3s ease,
+                      font-size 0.3s ease;
+        }
+    
+        &:focus-within label {
+          color: $primary;
+          font-size: $font-size-medium;
+        }
+
+        .password-wrapper {
+          position: relative;
+          display: flex;
+          align-items: center;
+          width: 100%;
+
+          input {
+            flex: 1; //ocupar todo o espaço disponível**
+            padding-right: 2.25rem;
+          }
+        
+          button.toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 45%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin-left: 8px;
+          }
+        }
+      }
+      
+      .button-wrapper {
+        @include flex-row(space-between, flex-start);
+        margin-top: $margin-small;
+
+        button {
+          @include button(
+            $primary, 
+            $white, 
+            $padding-medium, 
+            $border-radius-large
+          );
+          font-size: $font-size-medium;
+          width: 150px;
+        }
+
+        p.singup-text {
+          color: $white;
+          font-size: $font-size-small;
+          margin: 0;
+
+          a {
+            cursor: pointer;
+            color: $primary;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+
+            &:hover {
+              color: darken($primary, 10%);
+            }
+          }
+        }
+      }
+    }
+    
+  }
+}
