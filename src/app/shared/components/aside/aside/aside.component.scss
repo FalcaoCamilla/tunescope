@@ -1,0 +1,47 @@
+@import 'base';
+
+aside {
+  @include flex-column(center, center);
+  height: 90%;
+  box-sizing: border-box;
+  border-radius: $border-radius-large;
+  background-color: rgba(73, 80, 87, 0.188);
+  padding: $padding-large;
+  margin: $margin-large;
+
+  ul {
+    @include flex-column(flex-start, flex-start);
+    box-sizing: border-box;
+    list-style: none;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+
+    li {
+      @include flex-row(flex-start, center);
+      width: 100%;
+      box-sizing: border-box;
+      gap: $gap-medium;
+      padding: $padding-large $padding-medium;
+
+      a {
+        font-size: $font-size-medium;
+        font-weight: 400;
+        text-decoration: none;
+        color: $white;
+        cursor: pointer;
+      }
+
+      &:hover {
+        background-color: rgba(73, 80, 87, 0.188);
+        border-radius: $border-radius-medium;
+      }
+
+      &:last-of-type {
+        margin-top: auto;
+      }
+    }
+  }
+}
