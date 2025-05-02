@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import 'variables'; 
+@import 'mixins';
+@import 'animations';
+@import 'colors';
+
+html, body {
+  font-family: $font-family-base;
+  font-weight: 300;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  box-sizing: border-box;
+  background-color: $gray-600;
+}
