@@ -47,25 +47,14 @@
         width: 100%;
     
         input {
-          width: 100%;
-          box-sizing: border-box;
-          padding: $padding-large;
-          margin-bottom: $margin-medium;
-          border: none;
-          border-radius: $border-radius-large;
-          font-size: $font-size-medium;
-          color: $white;
-          background: $gray-500;
-          transition: margin-top 0.3s ease, 
-                      border-color 0.3s ease, 
-                      box-shadow 0.3s ease;
-    
-          &:focus {
-            margin-top: $margin-small;
-            border-color: $gray-100;
-            box-shadow: $box-shadow-input;
-            outline: none;
-          }
+          @include input(
+            100%, 
+            $gray-500, 
+            $white, 
+            $padding-large, 
+            $border-radius-large, 
+            true
+          );
         }
     
         label {
@@ -78,30 +67,6 @@
         &:focus-within label {
           color: $primary;
           font-size: $font-size-medium;
-        }
-
-        .password-wrapper {
-          position: relative;
-          display: flex;
-          align-items: center;
-          width: 100%;
-
-          input {
-            flex: 1; //ocupar todo o espaço disponível**
-            padding-right: 2.25rem;
-          }
-        
-          button.toggle-password {
-            position: absolute;
-            right: 10px;
-            top: 45%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            margin-left: 8px;
-          }
         }
       }
       
