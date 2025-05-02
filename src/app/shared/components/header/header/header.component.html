@@ -1,0 +1,13 @@
+<header>
+  <div class="search div-wrapper-icon">
+    <input
+      #searchInput
+      type="text" 
+      placeholder="Search"
+      (keyup)="onSearch(searchInput.value)"
+    >
+    <button type="button" class="btn-icon">
+      <img src="assets/icons/search-eye-line.svg" alt="search">
+    </button>
+  </div>
+</header>

@@ -1,0 +1,25 @@
+@import 'base';
+
+header {
+  @include flex-center();
+  
+  .search {
+    width: 40%;
+    input {
+      @include input(
+        80%, 
+        $gray-500, 
+        $white, 
+        $padding-medium, 
+        $border-radius-extra-large
+      );
+    }
+
+    .btn-icon {
+      opacity: 0.5;
+      top: 40%;
+      right: 1.25rem;
+    }
+  }
+}
+
