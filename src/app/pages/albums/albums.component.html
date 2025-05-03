@@ -1,0 +1,17 @@
+<app-list-header
+  [title]="'Most Popular Albums'"
+  [subtitle]="'Discover the most popular albums on Spotify.'"
+></app-list-header>
+
+<div class="cards-container">
+  <div *ngFor="let album of displayedAlbums()">
+    <app-card [data]="album" [type]="'album'"></app-card>
+  </div>
+</div>
+
+<app-pagination
+  [currentPage]="currentPage()"
+  [totalPages]="totalPages()"
+  (nextPage)="loadNextPage()"
+  (previousPage)="loadPreviousPage()"
+></app-pagination>
