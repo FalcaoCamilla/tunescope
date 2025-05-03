@@ -1,0 +1,61 @@
+<div class="card">
+  <ng-container *ngIf="type === 'artist'">
+    <div class="info-group">
+      <div class="title-group">
+        <h2>{{ data?.name }}</h2>
+        <div class="followers">
+          <img 
+            src='assets/icons/group-line.svg' 
+            alt="Followers Icon"
+          >
+          <p>Followers: {{ (data?.followers?.total ?? 0) | followers }}</p>
+        </div>
+      </div>
+      <div class="details">
+        <button 
+            type="button"
+            class="open-details" 
+            (click)="goToDetails()"
+          >
+            <img 
+              src='assets/icons/share-box-line.svg' 
+              alt="Details Icon"
+            >
+          </button>
+      </div>
+    </div>
+    <div class="img-wrapper">
+      <img [src]="data?.images?.[0]?.url" alt="{{ data?.name }}" />
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="type === 'album'">
+    <div class="info-group">
+      <div class="title-group">
+        <h2>{{ data?.name }}</h2>
+        <div class="followers">
+          <img 
+            src='assets/icons/group-line.svg' 
+            alt="Followers Icon"
+          >
+          <p>Tracks: {{ (data?.total_tracks ?? 0) }}</p>
+        </div>
+      </div>
+      <div class="details">
+        <button 
+            type="button"
+            class="open-details" 
+            (click)="goToDetails()"
+          >
+            <img 
+              src='assets/icons/share-box-line.svg' 
+              alt="Details Icon"
+            >
+          </button>
+      </div>
+    </div>
+    <div class="img-wrapper">
+      <img [src]="data?.images?.[0]?.url" alt="{{ data?.name }}" />
+    </div>
+  </ng-container>
+</div>

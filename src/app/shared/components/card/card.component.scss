@@ -1,0 +1,105 @@
+@import 'base';
+
+.card {
+  @include flex-column(flex-start, flex-start);
+  position: relative;
+  background: linear-gradient(to top right, $primary-400, $gray-600);
+  border-radius: $border-radius-large;
+  padding: $padding-large;
+  height: 300px;
+  width: 100%;
+  max-width: 260px;
+  box-sizing: border-box;
+  overflow: hidden;
+  margin: 0;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05) translateY(-5px); 
+  }
+
+  &:hover .details {
+    opacity: 1 !important; 
+    visibility: visible !important; 
+  }
+
+  .info-group {
+    @include flex-row(space-between, flex-start);
+    margin-bottom: $margin-medium;
+    width: 100%;
+
+    .title-group {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: left;
+      max-width: 80%;
+
+      h2 {
+        font-size: $heading-2;
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: $white;
+        width: 100%;
+        max-width: 100%;
+      }
+
+      p {
+        font-size: 0.775rem;
+        color: $white;
+        margin: 0;
+      }
+
+      .followers {
+        @include flex-row(flex-start, flex-start);
+        gap: $gap-medium;
+        background: color(srgb 0.18 0.18 0.18 / 0.39);
+        padding: $padding-small;
+        border-radius: $border-radius-large;
+
+        img {
+          width: 1rem;
+          height: 1rem;
+        }
+      }
+    }
+
+    .details {
+      position: absolute;
+      right: 0.625rem;
+      opacity: 0; // Esconde o botão inicialmente
+      visibility: hidden; // Remove o botão da renderização visual
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+
+      button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+
+        img {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
+      }
+    }
+  }
+
+  .img-wrapper {
+    width: 100%;
+    height: 250px;
+    background-color: $gray-500; //@to do
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; 
+      border-radius: $border-radius-large;
+    }
+  }
+}
