@@ -2,7 +2,7 @@
 
 aside {
   @include flex-column(center, center);
-  height: 90%;
+  height: 95%;
   box-sizing: border-box;
   border-radius: $border-radius-large;
   background-color: rgba(73, 80, 87, 0.188);
@@ -25,15 +25,24 @@ aside {
       box-sizing: border-box;
       gap: $gap-medium;
       padding: $padding-large $padding-medium;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
 
       a {
-        font-size: $font-size-medium;
+        font-size: $body-medium;
         font-weight: 400;
         text-decoration: none;
         color: $white;
         cursor: pointer;
       }
 
+      &.active a, 
+      &:hover a {
+        color: $primary;
+        font-weight: 600;
+      }
+
+      &.active,
       &:hover {
         background-color: rgba(73, 80, 87, 0.188);
         border-radius: $border-radius-medium;
