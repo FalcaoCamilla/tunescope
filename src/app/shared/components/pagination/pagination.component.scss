@@ -1,0 +1,25 @@
+@import 'base';
+
+.pagination {
+  @include flex-center;
+  gap: 1rem;
+
+  button {
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: $primary;
+    color: $white;
+    cursor: pointer;
+    border-radius: $border-radius-medium;
+
+    &:disabled {
+      background-color: $gray-400;
+      cursor: not-allowed;
+    }
+  }
+
+  span {
+    color: $white;
+    font-size: $body-medium;
+  }
+}
