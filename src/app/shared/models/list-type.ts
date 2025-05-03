@@ -1,0 +1,1 @@
+export type listType = 'artist' | 'album' | 'playlist' | 'track' | 'episode';
