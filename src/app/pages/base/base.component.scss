@@ -3,7 +3,7 @@
 :host {
   display: grid;
   grid-template-rows: 60px auto; //header na primeira linha, conteúdo flexível na segunda
-  grid-template-columns: 1fr 3fr; //aside na primeira coluna, conteúdo na segunda
+  grid-template-columns: minmax(200px, 300px) 1fr;
   height: 100vh; //altura total da página
   background: $gray-600;
 }
@@ -16,10 +16,14 @@ app-header {
 app-aside {
   grid-row: 1 / -1; //aside ocupa as duas linhas (do topo ao rodapé)
   grid-column: 1 / 2; //aside ocupa a primeira coluna
-  align-content: center;
+  align-content: start;
 }
 
 .main-content {
   grid-row: 2 / -1; //conteúdo ocupa a segunda linha
   grid-column: 2 / -1; //conteúdo ocupa a segunda coluna (ao lado do aside)
+  height: 100%;
+  overflow-y: auto; //rolagem vertical apenas no conteúdo
+  padding: 1.25rem 0.75rem;
+  box-sizing: border-box;
 }
