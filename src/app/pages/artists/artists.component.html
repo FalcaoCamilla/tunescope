@@ -1,0 +1,17 @@
+<app-list-header
+  [title]="'Most Popular Artists'"
+  [subtitle]="'Discover the most popular artists on Spotify.'"
+></app-list-header>
+
+<div class="cards-container">
+  <div *ngFor="let artist of displayedArtists()">
+    <app-card [data]="artist" [type]="'artist'"></app-card>
+  </div>
+</div>
+
+<app-pagination
+  [currentPage]="currentPage()"
+  [totalPages]="totalPages()"
+  (nextPage)="loadNextPage()"
+  (previousPage)="loadPreviousPage()"
+></app-pagination>
