@@ -29,7 +29,7 @@
   }
 
   .login-container {
-    @include flex-column(center, center);
+    @include flex-column(flex-start center);
     background-color: rgba(73, 80, 87, 0.188);
     padding: 0 2.5rem;
 
@@ -39,7 +39,6 @@
 
     form {
       width: 100%;
-      height: 50%;
       box-sizing: border-box;
   
       .input-group {
@@ -58,7 +57,7 @@
         }
     
         label {
-          font-size: $font-size-small;
+          font-size: $body-small;
           color: $white;
           transition: color 0.3s ease,
                       font-size 0.3s ease;
@@ -66,7 +65,7 @@
     
         &:focus-within label {
           color: $primary;
-          font-size: $font-size-medium;
+          font-size: $body-medium;
         }
       }
       
@@ -81,13 +80,13 @@
             $padding-medium, 
             $border-radius-large
           );
-          font-size: $font-size-medium;
+          font-size: $body-medium;
           width: 150px;
         }
 
         p.singup-text {
           color: $white;
-          font-size: $font-size-small;
+          font-size: $body-small;
           margin: 0;
 
           a {
