@@ -1,11 +1,12 @@
 import { Injectable, signal, computed, inject } from '@angular/core';
 import { ApiService } from '@shared/services/api.service';
 import { listType } from '@shared/models';
+import { IPaginatedListService } from '@shared/interfaces/paginated';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PaginatedListService<T> {
+export class PaginatedListService<T> implements IPaginatedListService<T> {
   readonly limit = 20;
 
   apiService = inject(ApiService);
