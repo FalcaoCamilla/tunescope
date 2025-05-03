@@ -13,7 +13,7 @@ export class AuthService implements IAuthService {
   router = inject(Router);
   http = inject(HttpClient);
   private readonly AUTH_KEY = 'authData';
-  private readonly apiUrl = environment.apiUrl;
+  private readonly authUrl = environment.authUrl;
 
   get user(): UserData | null {
     const authData = localStorage.getItem(this.AUTH_KEY);
@@ -29,11 +29,10 @@ export class AuthService implements IAuthService {
     return !!this.user?.token;
   }
 
-  register(data: UserData): void {
+  register(data: UserData): true {
     const userExists = this.users.some(u => u.username === data.username);
     if (userExists) {
-      console.error('Usuário já cadastrado.');
-      return;
+      return true;
     }
     /* cópia superficial do array atual para evitar manipulação direta ao meu getter
      * sendo modificado apenas localmente antes de ser salvo no localStorage
@@ -41,11 +40,11 @@ export class AuthService implements IAuthService {
     const users = this.users;
     users.push(data); 
     localStorage.setItem('users', JSON.stringify(users));
+    return true
   }
 
   login(data: UserData): void {
-    const userExists = this.users.some(u => u.username === data.username);
-    if (userExists) {
+    if (this.register(data)) {
       this.generateToken().subscribe({
         next: (response) => {
           const userDataWithToken = { ...data, token: response.access_token };
@@ -68,6 +67,6 @@ export class AuthService implements IAuthService {
 
   private generateToken(): Observable<AccessDataResponse> {
     const body = 'grant_type=client_credentials'
-    return this.http.post<AccessDataResponse>(`${this.apiUrl}/token`, body)
+    return this.http.post<AccessDataResponse>(`${this.authUrl}`, body)
   }
 }
