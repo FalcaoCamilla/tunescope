@@ -7,7 +7,7 @@ import { BehaviorSubject, debounceTime, distinctUntilChanged } from 'rxjs';
 export class SearchService {
   private searchTermSubject = new BehaviorSubject<string>('');
   searchTerm$ = this.searchTermSubject.asObservable().pipe(
-    debounceTime(2000),
+    debounceTime(800),
     distinctUntilChanged()
   );
   updateSearchTerm(term: string) {
