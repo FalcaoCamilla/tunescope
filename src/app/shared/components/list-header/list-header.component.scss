@@ -1,0 +1,24 @@
+@import 'base';
+
+.header {
+  @include flex-column(flex-start, flex-start);
+  gap: $gap-small;
+  max-height: 70px;
+  margin-bottom: 1rem;
+
+  h2 {
+    color: $primary-500;
+    margin: 0;
+  }
+
+  p {
+    font-size: $body-small;
+    color: white;
+    margin: 0;
+  }
+
+  hr {
+    width: 100%;
+    border: 1px solid rgba(41, 45, 49, 1)  
+  }
+}
