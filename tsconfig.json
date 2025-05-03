@@ -8,6 +8,7 @@
       "@pages/*": ["app/pages/*"],
       "@shared/*": ["app/shared/*"],
       "@models/*": ["app/shared/models/*"],
+      "@images/*": ["./assets/images/*"],
       "@environments/*": ["./environments/*"],
     },
     "outDir": "./dist/out-tsc",
