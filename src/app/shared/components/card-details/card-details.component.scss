@@ -89,7 +89,7 @@
   }
 
   .about {
-    @include flex-column(space-between, flex-start);
+    @include flex-column(flex-start, flex-start);
     gap: $gap-medium;
     width: 40%;
     height: 100%;
@@ -97,6 +97,7 @@
     h2, p {
       color: $white;
       margin: 0;
+      text-align: justify;
     }
 
     .tracks-container {
