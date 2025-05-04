@@ -2,9 +2,9 @@
 
 $font-family-base: Poppins, Arial, sans-serif;
 
-$heading-1: 1.5rem;
-$heading-2: 1.25rem;
-$heading-3: 1.125rem;
+$heading-1: 1.25rem;
+$heading-2: 1.75rem;
+$heading-3: 2rem;
 
 $body-small: 0.75rem;
 $body-medium: 0.875rem;
@@ -21,6 +21,7 @@ $margin-large: 1rem;
 $gap-small: 0.25rem;
 $gap-medium: 0.5rem;
 $gap-large: 0.75rem;
+$gap-extra-large: 1.75rem;
 
 $border-radius-small: 0.25rem;
 $border-radius-medium: 0.5rem;
@@ -29,3 +30,5 @@ $border-radius-extra-large: 2rem;
 
 $box-shadow-input: 0 0 0.25rem rgba($gray-300, 0.5);
 $box-shadow-card: 0 0 0.25rem rgba($gray-200, 0.5);
+
+$card-gradient-bg: linear-gradient(to top right, $primary-400, $gray-600)
