@@ -1,4 +1,6 @@
+import { ApiResponse } from "./api-response";
 import { Artist } from "./artist";
+import { Track } from "./track";
 
 export type Album = {
   album_type: string;
@@ -16,6 +18,7 @@ export type Album = {
   type: string;
   uri: string;
   artists: Partial<Artist>[];
+  tracks: ApiResponse<Track>;
 }
 
 type Image = {
