@@ -1,5 +1,7 @@
-<app-card-details
-  [data]="artist"
-  [type]="'artist'"
-></app-card-details>
-<app-albums [artistId]="artist.id"></app-albums>
+<div class="details-container">
+  <app-card-details
+    [data]="artist"
+    [type]="'artist'"
+  ></app-card-details>
+  <app-albums *ngIf="artist.id" [artistId]="artist.id"></app-albums>
+</div>
