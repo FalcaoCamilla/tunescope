@@ -7,11 +7,12 @@ import { PaginationComponent } from '@shared/components/pagination/pagination.co
 import { SearchService } from '@shared/services/search.service';
 import { PaginatedListService } from '@shared/services/paginated-list.service';
 import { ListHeaderComponent } from '@shared/components/list-header/list-header.component';
+import { SkeletonCardComponent } from '@shared/components/skeleton-card/skeleton-card.component';
 
 @Component({
   selector: 'app-artists',
   standalone: true,
-  imports: [CommonModule, CardComponent, ListHeaderComponent, PaginationComponent],
+  imports: [CommonModule, CardComponent, ListHeaderComponent, PaginationComponent, SkeletonCardComponent],
   templateUrl: './artists.component.html',
   styleUrls: ['./artists.component.scss'],
 })
@@ -24,8 +25,12 @@ export class ArtistsComponent implements OnInit {
   displayedArtists = this.paginatedListService.displayedItems;
   currentPage = this.paginatedListService.currentPage;
   totalPages = this.paginatedListService.totalPages;
+  loading = this.paginatedListService.loading;
 
+  skeletonArray = Array(12);  
+  
   ngOnInit(): void {
+    this.paginatedListService.resetParams();
     this.listenerSearchTerm();
   }
 
@@ -46,6 +51,6 @@ export class ArtistsComponent implements OnInit {
   }
 
   loadPreviousPage(): void {
-    this.paginatedListService.loadPreviousPage('artist');
+    this.paginatedListService.loadPreviousPage();
   }
 }
