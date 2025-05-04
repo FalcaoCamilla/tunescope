@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '@environments/environment';
@@ -19,45 +19,62 @@ export class AuthService implements IAuthService {
     const authData = localStorage.getItem(this.AUTH_KEY);
     return authData ? JSON.parse(authData) : null;
   }
-
-  get users(): UserData[] {
-    const usersJson = localStorage.getItem('users');
-    return usersJson ? JSON.parse(usersJson) : [];
-  }
   
   isAuthenticated(): boolean {
     return !!this.user?.token;
   }
 
-  register(data: UserData): true {
-    const userExists = this.users.some(u => u.username === data.username);
-    if (userExists) {
-      return true;
-    }
-    /* cópia superficial do array atual para evitar manipulação direta ao meu getter
-     * sendo modificado apenas localmente antes de ser salvo no localStorage
-     */
-    const users = this.users;
-    users.push(data); 
-    localStorage.setItem('users', JSON.stringify(users));
-    return true
+  login(data: UserData): void {
+    localStorage.setItem('user', JSON.stringify(data));
+    this.generateToken().subscribe({
+      next: (response) => {
+        const userDataWithToken = { ...data, token: response.access_token };
+        localStorage.setItem(this.AUTH_KEY, JSON.stringify(userDataWithToken));
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        console.error('Erro ao gerar token:', err);
+      }
+    });
   }
 
-  login(data: UserData): void {
-    if (this.register(data)) {
-      this.generateToken().subscribe({
-        next: (response) => {
-          const userDataWithToken = { ...data, token: response.access_token };
-          localStorage.setItem(this.AUTH_KEY, JSON.stringify(userDataWithToken));
-          this.router.navigate(['/home']);
-        },
-        error: (err) => {
-          console.error('Erro ao gerar token:', err);
-        }
-      });
-    } else {
-      console.error('Usuário nao cadastrado.');
-    }
+  redirectToSpotifyAuth(): void {
+    const params = new HttpParams()
+      .set('client_id', environment.client.id)
+      .set('response_type', 'code')
+      .set('redirect_uri', 'http://127.0.0.1:4200/callback')
+      .set('scope', 'user-read-private user-read-email');
+  
+    const authUrl = `https://accounts.spotify.com/authorize?${params.toString()}`;
+    window.location.href = authUrl;
+  }
+
+  exchangeCodeForToken(code: string): Observable<AccessDataResponse> {
+    const body = new HttpParams()
+      .set('grant_type', 'authorization_code')
+      .set('code', code)
+      .set('redirect_uri', 'http://127.0.0.1:4200/callback')
+      .set('client_id', environment.client.id)
+      .set('client_secret', environment.client.secret);
+  
+    const headers = {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    };
+  
+    return this.http.post<AccessDataResponse>(
+      'https://accounts.spotify.com/api/token',
+      body.toString(),
+      { headers }
+    );
+  }
+  saveAuthData(data: AccessDataResponse): void {
+    const authData = {
+      access_token: data.access_token,
+      token_type: data.token_type,
+      expires_in: data.expires_in,
+      created_at: new Date().getTime()
+    };
+    localStorage.setItem(this.AUTH_KEY, JSON.stringify(authData));
   }
 
   logout(): void {
