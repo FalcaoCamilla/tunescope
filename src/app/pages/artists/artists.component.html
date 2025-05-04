@@ -6,15 +6,15 @@
 <div class="list-container">
   <div class="cards-container">
     <ng-container *ngIf="loading(); else artistList">
-      <div *ngFor="let _ of skeletonArray">
+      <ng-container *ngFor="let _ of skeletonArray">
         <app-skeleton-card></app-skeleton-card>
-      </div>
+      </ng-container>
     </ng-container>
   
     <ng-template #artistList>
-      <div *ngFor="let artist of displayedArtists()">
+      <ng-container *ngFor="let artist of displayedArtists(); trackBy: identify">
         <app-card [data]="artist" [type]="'artist'"></app-card>
-      </div>
+      </ng-container>
     </ng-template>
   </div>
   
