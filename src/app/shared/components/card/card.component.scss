@@ -7,8 +7,7 @@
   border-radius: $border-radius-large;
   padding: $padding-large;
   height: 300px;
-  width: 100%;
-  max-width: 260px;
+  width: 260px;
   box-sizing: border-box;
   overflow: hidden;
   margin: 0;
@@ -78,6 +77,10 @@
         border: none;
         cursor: pointer;
 
+        &.explicit {
+          cursor: default;
+        }
+
         img {
           width: 1.5rem;
           height: 1.5rem;
@@ -89,7 +92,6 @@
   .img-wrapper {
     width: 100%;
     height: 250px;
-    background-color: $gray-500; //@to do
     display: flex;
     justify-content: center;
     align-items: center;
