@@ -2,6 +2,7 @@ import { Injectable, signal, computed, inject } from '@angular/core';
 import { ApiService } from '@shared/services/api.service';
 import { listType } from '@shared/models';
 import { IPaginatedListService } from '@shared/interfaces/paginated';
+import { finalize } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,7 @@ export class PaginatedListService<T> implements IPaginatedListService<T> {
   private items = signal<T[]>([]);
   private searchTerm = signal('');
   private totalItems = signal(0);
+  loading = signal(true);
   currentPage = signal(1);
 
   totalPages = computed(() => Math.ceil(this.totalItems() / this.limit));
@@ -32,11 +34,39 @@ export class PaginatedListService<T> implements IPaginatedListService<T> {
     this.items.set([]);
   }
 
-  private fetchItems(entityType: listType): void {
+  private fetchList(listType: listType): void {
     const offset = (this.currentPage() - 1) * this.limit;
-    this.apiService
-      .getListByName<T>(this.searchTerm(), entityType, this.limit, offset)
-      .subscribe({
+    let params = {
+      searchTerm: this.searchTerm(),
+      listType: listType,
+      limit: this.limit,
+      offset: offset,
+    };
+
+    this.apiService.getListByName<T>(params)
+    .pipe(finalize(() => this.loading.set(false))).subscribe({
+        next: (res) => {
+          this.items.update((prev) => [...prev, ...res.items]);
+          this.totalItems.set(res.total);
+        },
+        error: (err) => {
+          console.error('Error fetching items:', err);
+        }
+      });
+  }
+
+  private fetchListById(listType: listType, itemId: string, itemType: listType): void {
+    const offset = (this.currentPage() - 1) * this.limit;
+    let params = {
+      itemType: itemType,
+      itemId: itemId,
+      listType: listType,
+      limit: this.limit,
+      offset: offset,
+    };
+    
+    this.apiService.getListById<T>(params)
+      .pipe(finalize(() => this.loading.set(false))).subscribe({
         next: (res) => {
           this.items.update((prev) => [...prev, ...res.items]);
           this.totalItems.set(res.total);
@@ -47,13 +77,26 @@ export class PaginatedListService<T> implements IPaginatedListService<T> {
       });
   }
 
-  loadNextPage(entityType: listType): void {
+  setFetch(listType: listType, itemId?: string): void {
+    this.loading.set(true);
+    if (listType === 'artist' && itemId) {
+      this.fetchListById('album', itemId, listType);
+    } else if (listType === 'album' && itemId) {
+      this.fetchListById('track', itemId, listType);
+    } else if (listType === 'artist' || listType === 'album' || listType === 'track') {
+      this.fetchList(listType);
+    } else {
+      console.error(`Tipo de entidade desconhecido: ${listType}`);
+    }
+  }
+
+  loadNextPage(listType: listType, itemId?: string): void {
     const nextPage = this.currentPage() + 1;
   
     const isFirstPageEmpty = this.currentPage() === 1 && !this.items().length;
     const hasMorePages = this.currentPage() < this.totalPages();
   
-    if (isFirstPageEmpty) return this.fetchItems(entityType);
+    if (isFirstPageEmpty) return this.setFetch(listType, itemId);
     if (!hasMorePages) return;
   
     const start = (nextPage - 1) * this.limit;
@@ -64,20 +107,13 @@ export class PaginatedListService<T> implements IPaginatedListService<T> {
     if (itemsLoaded >= end) return this.currentPage.set(nextPage);
   
     this.currentPage.set(nextPage);
-    this.fetchItems(entityType);
+    this.setFetch(listType, itemId);
   }
 
-  loadPreviousPage(entityType: listType): void {
+  loadPreviousPage(): void {
     if (this.currentPage() > 1) {
       const previousPage = this.currentPage() - 1;
-      const start = (previousPage - 1) * this.limit;
-      const end = start + this.limit;
-
-      //caso os itens da página anterior já estejam carregados
-      if (this.items().length >= end) return this.currentPage.set(previousPage);
-
       this.currentPage.set(previousPage);
-      this.fetchItems(entityType);
     }
   }
 }
