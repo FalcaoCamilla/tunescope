@@ -16,7 +16,7 @@
 
   &.album {
     height: 100%;
-    background: linear-gradient(to top right, #fb8c00 39.5%, #35253c)
+    background: $album-tracks-gradient-bg
   }
 
   .img-wrapper {
@@ -40,8 +40,8 @@
       position: absolute;
       bottom: 0;
       width: 100%;
-      border-radius: 0 0 .75rem .75rem;
-      background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.85));
+      border-radius: 0 0 $border-radius-large $border-radius-large;
+      background: $info-gorup-gradient-bg;
 
       .title-group {
         display: flex;
@@ -80,7 +80,7 @@
 
           .genre {
             background: rgba(52, 58, 64, 0.56);
-            padding: 0.25rem 0.5rem;
+            padding: $padding-x-small $padding-small;
             border-radius: $border-radius-large;
           }
         }

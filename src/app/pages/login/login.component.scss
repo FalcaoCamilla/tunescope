@@ -20,7 +20,7 @@
 
   .branding {
     background: $primary-200;
-    background: radial-gradient(circle, $primary-200 0%, $primary-400 75%);
+    background: $login-gradient-bg;
 
     img {
       width: 50%;
@@ -30,8 +30,8 @@
 
   .login-container {
     @include flex-column(flex-start center);
-    background-color: rgba(73, 80, 87, 0.188);
-    padding: 0 2.5rem;
+    background-color: $gray-transparent;
+    padding: 0 $padding-3x-large;
 
     .signin-div {
       color: $white;

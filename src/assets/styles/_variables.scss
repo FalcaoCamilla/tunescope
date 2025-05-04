@@ -10,9 +10,13 @@ $body-small: 0.75rem;
 $body-medium: 0.875rem;
 $body-large: 1rem;
 
+$padding-x-small: 0.25rem;
 $padding-small: 0.5rem;
 $padding-medium: 0.75rem;
 $padding-large: 1rem;
+$padding-extra-large: 1.5rem;
+$padding-2x-large: 2rem;
+$padding-3x-large: 2.5rem;
 
 $margin-small: 0.5rem;
 $margin-medium: 0.75rem;
@@ -31,4 +35,8 @@ $border-radius-extra-large: 2rem;
 $box-shadow-input: 0 0 0.25rem rgba($gray-300, 0.5);
 $box-shadow-card: 0 0 0.25rem rgba($gray-200, 0.5);
 
-$card-gradient-bg: linear-gradient(to top right, $primary-400, $gray-600)
+$login-gradient-bg: radial-gradient(circle, $primary-200 0%, $primary-400 75%);
+$card-gradient-bg: linear-gradient(to top right, $primary-400, $gray-600);
+$album-tracks-gradient-bg: linear-gradient(to top right, $primary-400 39.5%, #35253c);
+$info-gorup-gradient-bg: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.85));
+$skeleton-gradient-bg: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);

@@ -5,7 +5,7 @@ aside {
   height: 95%;
   box-sizing: border-box;
   border-radius: $border-radius-large;
-  background-color: rgba(73, 80, 87, 0.188);
+  background-color: $gray-transparent;
   padding: $padding-large;
   margin: $margin-large;
 
@@ -44,7 +44,7 @@ aside {
 
       &.active,
       &:hover {
-        background-color: rgba(73, 80, 87, 0.188);
+        background-color: $gray-transparent;
         border-radius: $border-radius-medium;
       }
 
