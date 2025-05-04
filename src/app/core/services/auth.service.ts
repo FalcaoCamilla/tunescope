@@ -42,7 +42,7 @@ export class AuthService implements IAuthService {
 
   redirectToSpotifyAuth(): void {
     const params = new HttpParams()
-      .set('client_id', environment.client.id)
+      .set('client_id', environment.clientId)
       .set('response_type', 'code')
       .set('redirect_uri', this.redirectUri)
       .set('scope', 'user-read-private user-read-email');
@@ -56,8 +56,8 @@ export class AuthService implements IAuthService {
       .set('grant_type', 'authorization_code')
       .set('code', code)
       .set('redirect_uri', this.redirectUri)
-      .set('client_id', environment.client.id)
-      .set('client_secret', environment.client.secret);
+      .set('client_id', environment.clientId)
+      .set('client_secret', environment.clientSecret);
   
     const headers = {
       'Content-Type': 'application/x-www-form-urlencoded'

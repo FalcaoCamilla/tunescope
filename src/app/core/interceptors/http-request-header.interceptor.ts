@@ -13,7 +13,8 @@ import { environment } from '@environments/environment';
 @Injectable()
 export class HttpRequestHeaderInterceptor implements HttpInterceptor {
   authService = inject(AuthService);
-  private readonly client = environment.client;
+  private readonly clientId = environment.clientId;
+  private readonly clientSecret = environment.clientSecret;
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const headers = this.buildHeaders(request.url);
@@ -25,7 +26,7 @@ export class HttpRequestHeaderInterceptor implements HttpInterceptor {
     if(url.includes('token')) {
       return new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
-        Authorization: 'Basic ' + btoa(`${this.client.id}:${this.client.secret}`)
+        Authorization: 'Basic ' + btoa(`${this.clientId}:${this.clientSecret}`)
       })
     } 
     if (url.includes('wikipedia')) {
