@@ -14,6 +14,10 @@ const routes: Routes = [
     loadComponent: () => import('@pages/login/login.component').then(m => m.LoginComponent),
   },
   {
+    path: 'callback',
+    loadComponent: () => import('@pages/callback/callback.component').then(m => m.CallbackComponent),
+  },
+  {
     path: '',
     component: BaseComponent, 
     canActivate: [authGuard],
