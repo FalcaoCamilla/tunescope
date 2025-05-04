@@ -3,7 +3,7 @@
 .card {
   @include flex-column(flex-start, flex-start);
   position: relative;
-  background: linear-gradient(to top right, $primary-400, $gray-600);
+  background: $card-gradient-bg;
   border-radius: $border-radius-large;
   padding: $padding-large;
   height: 300px;
@@ -36,7 +36,7 @@
       max-width: 80%;
 
       h2 {
-        font-size: $heading-2;
+        font-size: $heading-1;
         margin: 0;
         white-space: nowrap;
         overflow: hidden;
@@ -52,7 +52,7 @@
         margin: 0;
       }
 
-      .followers {
+      .metrics {
         @include flex-row(flex-start, flex-start);
         gap: $gap-medium;
         background: color(srgb 0.18 0.18 0.18 / 0.39);
@@ -69,8 +69,8 @@
     .details {
       position: absolute;
       right: 0.625rem;
-      opacity: 0; // Esconde o botão inicialmente
-      visibility: hidden; // Remove o botão da renderização visual
+      opacity: 0;
+      visibility: hidden; //remove o botão da renderização visual
       transition: opacity 0.3s ease, visibility 0.3s ease;
 
       button {
