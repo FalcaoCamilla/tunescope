@@ -9,5 +9,5 @@ import { Component, Input } from '@angular/core';
 })
 export class ListHeaderComponent {
   @Input() title: string = '';
-  @Input() subtitle: string = '';
+  @Input() subtitle?: string;
 }
