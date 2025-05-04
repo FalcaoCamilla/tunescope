@@ -14,6 +14,8 @@ export class AuthService implements IAuthService {
   http = inject(HttpClient);
   private readonly AUTH_KEY = 'authData';
   private readonly authUrl = environment.authUrl;
+  private readonly redirectUri = environment.redirectUri;
+  private readonly accountsSpotifyUrl = environment.accountsSpotifyUrl;
 
   get user(): UserData | null {
     const authData = localStorage.getItem(this.AUTH_KEY);
@@ -42,10 +44,10 @@ export class AuthService implements IAuthService {
     const params = new HttpParams()
       .set('client_id', environment.client.id)
       .set('response_type', 'code')
-      .set('redirect_uri', 'http://127.0.0.1:4200/callback')
+      .set('redirect_uri', this.redirectUri)
       .set('scope', 'user-read-private user-read-email');
   
-    const authUrl = `https://accounts.spotify.com/authorize?${params.toString()}`;
+    const authUrl = `${this.accountsSpotifyUrl}authorize?${params.toString()}`;
     window.location.href = authUrl;
   }
 
@@ -53,7 +55,7 @@ export class AuthService implements IAuthService {
     const body = new HttpParams()
       .set('grant_type', 'authorization_code')
       .set('code', code)
-      .set('redirect_uri', 'http://127.0.0.1:4200/callback')
+      .set('redirect_uri', this.redirectUri)
       .set('client_id', environment.client.id)
       .set('client_secret', environment.client.secret);
   
@@ -62,9 +64,7 @@ export class AuthService implements IAuthService {
     };
   
     return this.http.post<AccessDataResponse>(
-      'https://accounts.spotify.com/api/token',
-      body.toString(),
-      { headers }
+      `${this.accountsSpotifyUrl}api/token`, body.toString(), { headers }
     );
   }
   saveAuthData(data: AccessDataResponse): void {
