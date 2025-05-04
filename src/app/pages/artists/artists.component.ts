@@ -25,11 +25,13 @@ export class ArtistsComponent implements OnInit {
   displayedArtists = this.paginatedListService.displayedItems;
   currentPage = this.paginatedListService.currentPage;
   totalPages = this.paginatedListService.totalPages;
-  loading = this.paginatedListService.loading ?? true;
+  loading = this.paginatedListService.loading;
+  identify = (index: number, item: Artist) => item.id;
 
   skeletonArray = Array(12);  
   
   ngOnInit(): void {
+    this.loading.set(true);
     this.paginatedListService.resetParams();
     this.listenerSearchTerm();
   }

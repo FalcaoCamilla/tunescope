@@ -27,11 +27,12 @@ private searchService = inject(SearchService);
   displayedAlbums = this.paginatedListService.displayedItems;
   currentPage = this.paginatedListService.currentPage;
   totalPages = this.paginatedListService.totalPages;
-  loading = this.paginatedListService.loading ?? true;
+  loading = this.paginatedListService.loading;
 
   skeletonArray = Array(12);
 
   ngOnInit(): void {
+    this.loading.set(true);
     this.paginatedListService.resetParams();
     if(this.artistId) {
       this.paginatedListService.loadNextPage('artist', this.artistId);
