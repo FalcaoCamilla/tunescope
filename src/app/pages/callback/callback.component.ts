@@ -21,8 +21,8 @@ export class CallbackComponent {
       if (code) {
         this.authService.exchangeCodeForToken(code).subscribe({
           next: (tokenData) => {
-            this.authService.saveAuthData(tokenData); // salva token
-            this.router.navigate(['/home']);
+            this.authService.saveAuthData(tokenData);
+            //localStorage.setItem('access_token', tokenData.access_token);
           },
           error: (err) => {
             console.error('Erro ao trocar code por token:', err);
