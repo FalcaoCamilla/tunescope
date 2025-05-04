@@ -32,7 +32,7 @@ const routes: Routes = [
         loadComponent: () => import('@pages/albums/albums.component').then(m => m.AlbumsComponent),
       },
       {
-        path: 'albums/:id',
+        path: 'album/:id',
         loadComponent: () => import('@pages/albums/album-details/album-details.component').then(m => m.AlbumDetailsComponent),
       },
       {
@@ -42,6 +42,10 @@ const routes: Routes = [
       {
         path: 'artist/:id',
         loadComponent: () => import('@pages/artists/artist-details/artist-details.component').then(m => m.ArtistDetailsComponent),
+      },
+      {
+        path: 'tracks',
+        loadComponent: () => import('@pages/tracks/tracks.component').then(m => m.TracksComponent),
       },
       {
         path: '**',
