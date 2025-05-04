@@ -58,4 +58,23 @@
       <img [src]="data?.images?.[0]?.url" alt="{{ data?.name }}" />
     </div>
   </ng-container>
+
+  <ng-container *ngIf="type === 'track'">
+    <div class="info-group">
+      <div class="title-group">
+        <h2>{{ data?.name }}</h2>
+      </div>
+      <div *ngIf="data?.explicit" class="details">
+        <button class="explicit" type="button">
+          <img 
+            src='assets/icons/explicit-line.svg' 
+            alt="Explicit"
+          >
+        </button>
+      </div>
+    </div>
+    <div class="img-wrapper">
+      <img [src]="data?.album?.images?.[0]?.url ?? 'assets/images/track.png'" alt="{{ data?.album?.name }}"/>
+    </div>
+  </ng-container>
 </div>
