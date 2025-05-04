@@ -9,7 +9,7 @@ import { TracksComponent } from '@pages/tracks/tracks.component';
 @Component({
   selector: 'app-album-details',
   standalone: true,
-  imports: [CommonModule, CardDetailsComponent, TracksComponent],
+  imports: [CommonModule, CardDetailsComponent],
   templateUrl: './album-details.component.html',
   styleUrls: ['./album-details.component.scss']
 })
