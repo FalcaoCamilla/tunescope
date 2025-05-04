@@ -17,20 +17,20 @@ export class AuthService implements IAuthService {
   private readonly redirectUri = environment.redirectUri;
   private readonly accountsSpotifyUrl = environment.accountsSpotifyUrl;
 
-  get user(): UserData | null {
+  get authData(): UserData | null {
     const authData = localStorage.getItem(this.AUTH_KEY);
     return authData ? JSON.parse(authData) : null;
   }
   
   isAuthenticated(): boolean {
-    return !!this.user?.token;
+    return !!this.authData?.access_token;
   }
 
   login(data: UserData): void {
     localStorage.setItem('user', JSON.stringify(data));
     this.generateToken().subscribe({
       next: (response) => {
-        const userDataWithToken = { ...data, token: response.access_token };
+        const userDataWithToken = { ...data, access_token: response.access_token };
         localStorage.setItem(this.AUTH_KEY, JSON.stringify(userDataWithToken));
         this.router.navigate(['/home']);
       },
@@ -75,6 +75,7 @@ export class AuthService implements IAuthService {
       created_at: new Date().getTime()
     };
     localStorage.setItem(this.AUTH_KEY, JSON.stringify(authData));
+    this.router.navigate(['/home']);
   }
 
   logout(): void {

@@ -15,7 +15,6 @@ export class HttpRequestHeaderInterceptor implements HttpInterceptor {
   authService = inject(AuthService);
   private readonly clientId = environment.clientId;
   private readonly clientSecret = environment.clientSecret;
-
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const headers = this.buildHeaders(request.url);
     const clonedRequest = request.clone({ headers });
@@ -36,7 +35,7 @@ export class HttpRequestHeaderInterceptor implements HttpInterceptor {
     }
     return new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': `Bearer ${this.authService.user?.token}`
+      'Authorization': `Bearer ${this.authService.authData?.access_token}`
     })
   }
 }
