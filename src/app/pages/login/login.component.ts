@@ -29,4 +29,8 @@ export class LoginComponent {
     this.authService.login(userData);
   }  
 
+  loginWithSpotify() {
+    this.authService.redirectToSpotifyAuth();
+  }
+
 }
