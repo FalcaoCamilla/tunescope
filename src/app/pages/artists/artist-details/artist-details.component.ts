@@ -16,7 +16,6 @@ import { CardDetailsComponent } from '@shared/components/card-details/card-detai
 export class ArtistDetailsComponent implements OnInit {
   apiService = inject(ApiService);
   route = inject(ActivatedRoute);
-
   protected artist: Artist = {} as Artist;
 
   ngOnInit() {
@@ -32,12 +31,5 @@ export class ArtistDetailsComponent implements OnInit {
         });
       }
     });
-  }
-
-  goToExternalUrl(): void {
-    const externalUrl = this.artist?.external_urls?.spotify; 
-    if (externalUrl) {
-      window.open(externalUrl, '_blank');
-    }
   }
 }
