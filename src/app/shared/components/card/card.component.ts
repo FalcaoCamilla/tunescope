@@ -4,6 +4,7 @@ import { Artist, listType } from '@shared/models';
 import { Album } from '@shared/models/album';
 import { Router } from '@angular/router';
 import { FollowersPipe } from '@shared/pipes/followers.pipe';
+import { Track } from '@shared/models/track';
 
 @Component({
   selector: 'app-card',
@@ -13,7 +14,7 @@ import { FollowersPipe } from '@shared/pipes/followers.pipe';
   styleUrls: ['./card.component.scss']
 })
 export class CardComponent {
-  @Input() data?: Partial<Artist & Album>;
+  @Input() data?: Partial<Artist & Album & Track>;
   @Input() type?: listType;
 
   router = inject(Router);
