@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '@environments/environment';
-import { IWikipediaService } from '@shared/interfaces/wikipedia';
+import { IWikipediaService } from '@shared/interfaces/wikipedia.interface';
 import { map, Observable } from 'rxjs';
 
 @Injectable({
