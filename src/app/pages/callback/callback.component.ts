@@ -1,34 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-callback',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './callback.component.html',
-  styleUrls: ['./callback.component.scss']
+  template: ''
 })
-export class CallbackComponent {
+export class CallbackComponent implements OnInit { 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private authService: AuthService
-  ) {
-    this.route.queryParamMap.subscribe(params => {
-      const code = params.get('code');
-      if (code) {
-        this.authService.exchangeCodeForToken(code).subscribe({
-          next: (tokenData) => {
-            this.authService.saveAuthData(tokenData);
-            //localStorage.setItem('access_token', tokenData.access_token);
-          },
-          error: (err) => {
-            console.error('Erro ao trocar code por token:', err);
-          }
-        });
-      }
-    });
+  ) {}
+
+  ngOnInit(): void {
+    this.route.queryParamMap
+      .pipe(
+        switchMap((params) => {
+          const code = params.get('code');
+          if (code) return this.authService.exchangeCodeForToken(code);
+          throw new Error('Código de autorização não encontrado.');
+        })
+      )
+      .subscribe({
+        next: (tokenData) => { this.authService.saveAuthData(tokenData) },
+        error: (err) => { console.error('Erro ao trocar code por token:', err) }
+      });
   }
 }
