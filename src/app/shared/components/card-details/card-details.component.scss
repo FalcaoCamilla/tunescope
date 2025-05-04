@@ -69,13 +69,19 @@
         }
 
         .metrics {
-          @include flex-row(flex-start, flex-start);
+          @include flex-row(flex-start, center);
           gap: $gap-medium;
           padding: $padding-small 0;
 
           img {
             width: 1rem;
             height: 1rem;
+          }
+
+          .genre {
+            background: rgba(52, 58, 64, 0.56);
+            padding: 0.25rem 0.5rem;
+            border-radius: $border-radius-large;
           }
         }
       }
