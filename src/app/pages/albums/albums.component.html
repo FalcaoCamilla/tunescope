@@ -1,12 +1,20 @@
 <app-list-header
-  [title]="'Most Popular Albums'"
-  [subtitle]="'Discover the most popular albums on Spotify.'"
+  [title]="!artistId ? 'Most Popular Albums' : 'Albums'"
+  [subtitle]="!artistId ? 'Discover the most popular albums on Spotify.' : undefined"
 ></app-list-header>
 
 <div class="cards-container">
-  <div *ngFor="let album of displayedAlbums()">
-    <app-card [data]="album" [type]="'album'"></app-card>
-  </div>
+  <ng-container *ngIf="loading(); else albumList">
+    <div *ngFor="let _ of skeletonArray">
+      <app-skeleton-card></app-skeleton-card>
+    </div>
+  </ng-container>
+
+  <ng-template #albumList>
+    <div *ngFor="let album of displayedAlbums()">
+      <app-card [data]="album" [type]="'album'"></app-card>
+    </div>
+  </ng-template>
 </div>
 
 <app-pagination
