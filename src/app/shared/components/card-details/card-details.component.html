@@ -11,13 +11,16 @@
               alt="Followers Icon"
             >
             <p>Followers: {{ (data.followers?.total ?? 0) | followers }}</p>
+            <div *ngFor="let genre of data.genres">
+              <p class="genre">{{ genre }}</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div class="about">
-      <h2>test</h2>
-      <p>{{ data.popularity }}</p>
+      <h2>Biography</h2>
+      <p>{{ data.biography }}</p>
     </div>
   </ng-container>
   <ng-container *ngIf="type === 'album'">

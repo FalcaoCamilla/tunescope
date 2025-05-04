@@ -15,5 +15,6 @@ export type Artist = {
   name: string,
   popularity: number,
   type: string,
-  uri: string
+  uri: string,
+  biography?: string
 }
