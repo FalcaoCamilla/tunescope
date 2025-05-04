@@ -1,5 +1,5 @@
 <header>
-  <button *ngIf="showBackButton" type="button" class="back-icon btn-icon" (click)="goBack()">
+  <button *ngIf="detailsRoute()" type="button" class="back-icon btn-icon" (click)="goBack()">
     <img src="assets/icons/arrow-go-back-line.svg" alt="back">
   </button>
   <div class="search div-wrapper-icon">
@@ -7,6 +7,7 @@
       #searchInput
       type="text" 
       placeholder="Search"
+      [disabled]="detailsRoute()"
       (keyup)="onSearch(searchInput.value)"
     >
     <button type="button" class="btn-icon">

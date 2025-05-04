@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { SearchService } from '@shared/services/search.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  showBackButton: boolean = false;
+  detailsRoute = signal(false);
 
   constructor(
     private location: Location,
@@ -21,7 +21,7 @@ export class HeaderComponent {
   ) {
     this.router.events.subscribe(() => {
       const childRoute = this.route.firstChild;
-      this.showBackButton = !!childRoute?.snapshot.paramMap.get('id');
+      this.detailsRoute.set(!!childRoute?.snapshot.paramMap.get('id'));
     });
   }
 
