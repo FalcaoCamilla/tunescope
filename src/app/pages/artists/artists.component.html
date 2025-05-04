@@ -4,9 +4,17 @@
 ></app-list-header>
 
 <div class="cards-container">
-  <div *ngFor="let artist of displayedArtists()">
-    <app-card [data]="artist" [type]="'artist'"></app-card>
-  </div>
+  <ng-container *ngIf="loading(); else artistList">
+    <div *ngFor="let _ of skeletonArray">
+      <app-skeleton-card></app-skeleton-card>
+    </div>
+  </ng-container>
+
+  <ng-template #artistList>
+    <div *ngFor="let artist of displayedArtists()">
+      <app-card [data]="artist" [type]="'artist'"></app-card>
+    </div>
+  </ng-template>
 </div>
 
 <app-pagination
