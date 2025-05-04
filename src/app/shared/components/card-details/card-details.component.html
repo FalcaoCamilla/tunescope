@@ -1,0 +1,49 @@
+<div class="card" [ngClass]="type">
+  <ng-container *ngIf="type === 'artist'">
+    <div class="img-wrapper">
+      <img [src]="data.images?.[0]?.url" alt="{{ data.name }}" />
+      <div class="info-group">
+        <div class="title-group">
+          <h2>{{ data.name }}</h2>
+          <div class="metrics">
+            <img 
+              src='assets/icons/group-line.svg' 
+              alt="Followers Icon"
+            >
+            <p>Followers: {{ (data.followers?.total ?? 0) | followers }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="about">
+      <h2>test</h2>
+      <p>{{ data.popularity }}</p>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="type === 'album'">
+    <div class="img-wrapper">
+      <img [src]="data.images?.[0]?.url" alt="{{ data.name }}" />
+      <div class="info-group">
+        <div class="title-group">
+          <h2>{{ data.name }}</h2>
+          <div class="metrics">
+            <img 
+              src='assets/icons/album-line.svg' 
+              alt="Track Icon"
+            >
+            <p>Tracks: {{ data.total_tracks }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="about">
+      <h2>Tracks</h2>
+      <div class="tracks-container">
+        <div class="tracks" *ngFor="let track of data.tracks?.items">
+          <p>{{ track.name }}</p>
+          <img src="assets/images/track.png" width="100px" height="100px"/>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
