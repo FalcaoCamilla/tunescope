@@ -1,0 +1,26 @@
+<app-list-header
+  [title]="!albumId ? 'Most Popular Tracks' : 'Tracks'"
+  [subtitle]="!albumId ? 'Discover the most popular tracks on Spotify.' : undefined"
+></app-list-header>
+<div class="list-container">
+  <div class="cards-container">
+    <ng-container *ngIf="loading(); else trackList">
+      <div *ngFor="let _ of skeletonArray">
+        <app-skeleton-card></app-skeleton-card>
+      </div>
+    </ng-container>
+  
+    <ng-template #trackList>
+      <div *ngFor="let track of displayedTracks()">
+        <app-card [data]="track" [type]="'track'"></app-card>
+      </div>
+    </ng-template>
+  </div>
+  
+  <app-pagination
+    [currentPage]="currentPage()"
+    [totalPages]="totalPages()"
+    (nextPage)="loadNextPage()"
+    (previousPage)="loadPreviousPage()"
+  ></app-pagination>
+</div>
