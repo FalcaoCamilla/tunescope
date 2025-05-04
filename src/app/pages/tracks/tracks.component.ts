@@ -27,11 +27,12 @@ export class TracksComponent {
   displayedTracks = this.paginatedListService.displayedItems;
   currentPage = this.paginatedListService.currentPage;
   totalPages = this.paginatedListService.totalPages;
-  loading = this.paginatedListService.loading ?? true;
+  loading = this.paginatedListService.loading;
 
   skeletonArray = Array(12);
 
   ngOnInit(): void {
+    this.loading.set(true);
     this.paginatedListService.resetParams();
     if(this.albumId) {
       this.paginatedListService.loadNextPage('album', this.albumId);
