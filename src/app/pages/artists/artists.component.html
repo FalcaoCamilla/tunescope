@@ -3,23 +3,25 @@
   [subtitle]="'Discover the most popular artists on Spotify.'"
 ></app-list-header>
 
-<div class="cards-container">
-  <ng-container *ngIf="loading(); else artistList">
-    <div *ngFor="let _ of skeletonArray">
-      <app-skeleton-card></app-skeleton-card>
-    </div>
-  </ng-container>
-
-  <ng-template #artistList>
-    <div *ngFor="let artist of displayedArtists()">
-      <app-card [data]="artist" [type]="'artist'"></app-card>
-    </div>
-  </ng-template>
+<div class="list-container">
+  <div class="cards-container">
+    <ng-container *ngIf="loading(); else artistList">
+      <div *ngFor="let _ of skeletonArray">
+        <app-skeleton-card></app-skeleton-card>
+      </div>
+    </ng-container>
+  
+    <ng-template #artistList>
+      <div *ngFor="let artist of displayedArtists()">
+        <app-card [data]="artist" [type]="'artist'"></app-card>
+      </div>
+    </ng-template>
+  </div>
+  
+  <app-pagination
+    [currentPage]="currentPage()"
+    [totalPages]="totalPages()"
+    (nextPage)="loadNextPage()"
+    (previousPage)="loadPreviousPage()"
+  ></app-pagination>
 </div>
-
-<app-pagination
-  [currentPage]="currentPage()"
-  [totalPages]="totalPages()"
-  (nextPage)="loadNextPage()"
-  (previousPage)="loadPreviousPage()"
-></app-pagination>
