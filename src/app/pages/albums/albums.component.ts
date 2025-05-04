@@ -27,7 +27,7 @@ private searchService = inject(SearchService);
   displayedAlbums = this.paginatedListService.displayedItems;
   currentPage = this.paginatedListService.currentPage;
   totalPages = this.paginatedListService.totalPages;
-  loading = this.paginatedListService.loading;
+  loading = this.paginatedListService.loading ?? true;
 
   skeletonArray = Array(12);
 

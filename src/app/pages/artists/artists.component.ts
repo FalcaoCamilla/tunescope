@@ -25,7 +25,7 @@ export class ArtistsComponent implements OnInit {
   displayedArtists = this.paginatedListService.displayedItems;
   currentPage = this.paginatedListService.currentPage;
   totalPages = this.paginatedListService.totalPages;
-  loading = this.paginatedListService.loading;
+  loading = this.paginatedListService.loading ?? true;
 
   skeletonArray = Array(12);  
   
