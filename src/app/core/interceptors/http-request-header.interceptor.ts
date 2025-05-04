@@ -28,6 +28,11 @@ export class HttpRequestHeaderInterceptor implements HttpInterceptor {
         Authorization: 'Basic ' + btoa(`${this.client.id}:${this.client.secret}`)
       })
     } 
+    if (url.includes('wikipedia')) {
+      return new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded'
+      });
+    }
     return new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
       'Authorization': `Bearer ${this.authService.user?.token}`
