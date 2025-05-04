@@ -2,8 +2,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '@environments/environment';
-import { IAuthService } from '@core/interfaces/auth.interface';
 import { AccessDataResponse, UserData } from '@core/models';
+import { IAuthService } from '@core/interfaces/auth.interface';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -34,9 +34,7 @@ export class AuthService implements IAuthService {
         localStorage.setItem(this.AUTH_KEY, JSON.stringify(userDataWithToken));
         this.router.navigate(['/home']);
       },
-      error: (err) => {
-        console.error('Erro ao gerar token:', err);
-      }
+      error: (err) => { console.error('Erro ao gerar token:', err) }
     });
   }
 
@@ -78,13 +76,13 @@ export class AuthService implements IAuthService {
     this.router.navigate(['/home']);
   }
 
-  logout(): void {
-    localStorage.removeItem(this.AUTH_KEY);
-    this.router.navigate(['/login']);
-  }
-
   private generateToken(): Observable<AccessDataResponse> {
     const body = 'grant_type=client_credentials'
     return this.http.post<AccessDataResponse>(`${this.authUrl}`, body)
+  }
+
+  logout(): void {
+    localStorage.removeItem(this.AUTH_KEY);
+    this.router.navigate(['/login']);
   }
 }
