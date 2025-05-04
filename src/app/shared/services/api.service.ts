@@ -4,7 +4,7 @@ import { Album, listType } from '@shared/models';
 import { ApiResponse } from '@shared/models/api-response';
 import { environment } from '@environments/environment';
 import { map, Observable } from 'rxjs';
-import { IApiService } from '@shared/interfaces/api';
+import { IApiService } from '@shared/interfaces/api.interface';
 import { ListParams } from '@shared/models/list-params';
 
 @Injectable({

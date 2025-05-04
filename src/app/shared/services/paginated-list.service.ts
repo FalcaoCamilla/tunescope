@@ -1,7 +1,7 @@
 import { Injectable, signal, computed, inject } from '@angular/core';
 import { ApiService } from '@shared/services/api.service';
 import { listType } from '@shared/models';
-import { IPaginatedListService } from '@shared/interfaces/paginated';
+import { IPaginatedListService } from '@shared/interfaces/paginated.interface';
 import { finalize } from 'rxjs';
 
 @Injectable({

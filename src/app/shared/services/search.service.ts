@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ISearchService } from '@shared/interfaces/search';
+import { ISearchService } from '@shared/interfaces/search.interface';
 import { BehaviorSubject, debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Injectable({
