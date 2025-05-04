@@ -2,7 +2,19 @@
 
 header {
   @include flex-center();
-  
+  position: relative;
+
+  .back-icon {
+    position: absolute;
+    left: 1rem;
+    cursor: pointer;
+
+    img {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
   .search {
     width: 40%;
     input {

@@ -1,4 +1,7 @@
 <header>
+  <button *ngIf="showBackButton" type="button" class="back-icon btn-icon" (click)="goBack()">
+    <img src="assets/icons/arrow-go-back-line.svg" alt="back">
+  </button>
   <div class="search div-wrapper-icon">
     <input
       #searchInput
