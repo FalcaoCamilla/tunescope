@@ -7,7 +7,7 @@ import { BaseComponent } from '@pages/base/base.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'artists',
     pathMatch: 'full',
   },
   {

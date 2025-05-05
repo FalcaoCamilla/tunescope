@@ -38,7 +38,7 @@ export class AuthService implements IAuthService {
           created_at: new Date().getTime()
         };
         localStorage.setItem(this.AUTH_KEY, JSON.stringify(authData));
-        this.router.navigate(['/home']);
+        this.router.navigate(['/artists']);
       },
       error: (err) => { console.error('Erro ao gerar token:', err) }
     });
@@ -81,7 +81,7 @@ export class AuthService implements IAuthService {
     };
     localStorage.setItem(this.AUTH_KEY, JSON.stringify(authData));
     this.userService.setSpotifyUser();
-    this.router.navigate(['/home']);
+    this.router.navigate(['/artists']);
   }
 
   private generateToken(): Observable<AccessDataResponse> {
