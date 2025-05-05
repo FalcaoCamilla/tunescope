@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '@core/services/auth.service';
-import { UserData } from '@core/models';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +15,7 @@ export class LoginComponent {
   authService = inject(AuthService);
   showPassword = signal(false);
   form = new FormGroup({
-    username: new FormControl('', Validators.required),
+    display_name: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
   });
 
@@ -25,7 +24,7 @@ export class LoginComponent {
       this.form.markAsDirty();
       return
     }
-    const userData = this.form.getRawValue() as UserData;
+    const userData = this.form.getRawValue() as {display_name: string, password: string};
     this.authService.login(userData);
   }  
 
