@@ -49,7 +49,7 @@ export class AuthService implements IAuthService {
       .set('client_id', environment.clientId)
       .set('response_type', 'code')
       .set('redirect_uri', this.redirectUri)
-      .set('scope', 'user-read-private user-read-email');
+      .set('scope', 'user-follow-read user-read-email playlist-read-private user-library-read user-read-recently-played user-top-read');
   
     const authUrl = `${this.accountsSpotifyUrl}authorize?${params.toString()}`;
     window.location.href = authUrl;
