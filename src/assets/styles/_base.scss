@@ -28,8 +28,8 @@ html, body {
   align-items: start;
   width: 100%;
 
-  @media (min-width: calc(220px * 4 + 3rem)) { // Limita a 4 colunas no máximo
-    grid-template-columns: repeat(4, 1fr);
+  div {
+    width: 100%;
   }
 }
 
