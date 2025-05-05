@@ -1,0 +1,30 @@
+@import 'base';
+
+.unauthorized-container {
+  @include flex-column(center, center);
+  gap: $padding-medium;
+  padding: $padding-medium;
+  height: 80%;
+  width: 100%;
+  margin: auto;
+
+  img {
+    width: 100px;
+    height: 100px;
+  }
+
+  p {
+    width: 50%;
+    text-align: center;
+    color: $white;
+
+    b {
+      cursor: pointer;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+}

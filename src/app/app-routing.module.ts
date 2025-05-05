@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { authGuard } from '@core/guards/auth.guard';
+import { spotifyAuthGuard } from '@core/guards/spotify-auth.guard';
 import { BaseComponent } from '@pages/base/base.component';
 
 const routes: Routes = [
@@ -24,7 +25,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'home',
+        redirectTo: 'artists',
         pathMatch: 'full',
       },
       {
@@ -52,8 +53,17 @@ const routes: Routes = [
         loadComponent: () => import('@pages/tracks/tracks.component').then(m => m.TracksComponent),
       },
       {
+        path: 'favorites',
+        loadComponent: () => import('@pages/favorites/favorites.component').then(m => m.FavoritesComponent),
+        canActivate: [spotifyAuthGuard]
+      },
+      {
+        path: 'unauthorized',
+        loadComponent: () => import('@pages/unauthorized/unauthorized.component').then(m => m.UnauthorizedComponent),
+      },
+      {
         path: '**',
-        redirectTo: 'home',
+        redirectTo: 'artists',
       },
     ],
   }
