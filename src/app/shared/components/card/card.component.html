@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="img-wrapper">
-      <img [src]="data?.images?.[0]?.url" alt="{{ data?.name }}" />
+      <img [src]="data?.images?.[0]?.url ?? 'assets/icons/image-2-fill.svg'" alt="{{ data?.name }}" />
     </div>
   </ng-container>
 
@@ -55,7 +55,7 @@
       </div>
     </div>
     <div class="img-wrapper">
-      <img [src]="data?.images?.[0]?.url" alt="{{ data?.name }}" />
+      <img [src]="data?.images?.[0]?.url ?? 'assets/icons/image-2-fill.svg'" alt="{{ data?.name }}" />
     </div>
   </ng-container>
 
