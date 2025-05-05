@@ -1,8 +1,9 @@
 @import 'base';
 
 header {
-  @include flex-center();
+  @include flex-row(center, center);
   position: relative;
+  padding: 0 1rem;
 
   .back-icon {
     position: absolute;
@@ -17,9 +18,11 @@ header {
 
   .search {
     width: 40%;
+    margin: 0 auto;
+    
     input {
       @include input(
-        80%, 
+        100%, 
         $gray-500, 
         $white, 
         $padding-medium, 
@@ -31,6 +34,32 @@ header {
       opacity: 0.5;
       top: 40%;
       right: 1.25rem;
+    }
+  }
+
+  .user {
+    @include flex-row(center, center);
+    gap: $gap-medium;
+    margin-left: auto;
+    font-weight: 500;
+    font-size: $body-medium;
+    transition: color 0.3s ease-in-out;
+
+    &:hover a {
+      color: $primary;
+    }
+
+    img {
+      width: 1.25rem;
+      height: 1.25rem;
+      border-radius: 50%;
+    }
+
+    a {
+      margin: 0;
+      cursor: pointer;
+      text-decoration: none;
+      color: $gray-200;
     }
   }
 }

@@ -14,4 +14,8 @@
       <img src="assets/icons/search-eye-line.svg" alt="search">
     </button>
   </div>
+  <div class="user">
+    <img [src]="user?.images?.[0]?.url ?? 'assets/icons/user-line.svg'" alt="User Image">
+    <a routerLink="/favorites" routerLinkActive="active">{{ user?.display_name }}</a>
+  </div>
 </header>
