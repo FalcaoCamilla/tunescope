@@ -66,8 +66,6 @@
     }
 
     .details {
-      position: absolute;
-      right: 0.625rem;
       opacity: 0;
       visibility: hidden; //remove o botão da renderização visual
       transition: opacity 0.3s ease, visibility 0.3s ease;
