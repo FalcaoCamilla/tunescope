@@ -44,8 +44,8 @@ export class UserService implements IUserService{
 
   getCurrentUserFavorites<T>(listParams: Pick<ListParams, 'listType'| 'limit'>): Observable<{[key: string]: ApiResponse<T>}[listType]> {
     const params = new HttpParams()
-      .set('limit', listParams.limit.toString())
-      .set('type', listParams.listType);
+    .set('type', listParams.listType)
+    .set('limit', listParams.limit.toString());
 
     return this.http.get<{[key: string]: ApiResponse<T>}>(`${this.apiUrl}/me/following`, { params }).pipe(
       map((response) => response[listParams.listType+'s'])

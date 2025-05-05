@@ -25,7 +25,7 @@ export class FavoritesComponent implements OnInit {
   }
 
   getFollowedArtists() {
-    this.userService.getCurrentUserFavorites<Artist>({ listType: 'artist', limit: 50 })
+    this.userService.getCurrentUserFavorites<Artist>({ listType: 'artist', limit: 20 })
       .pipe(finalize(() => this.loading.set(false)))
       .subscribe({
         next: (res) => {
