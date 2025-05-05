@@ -2,9 +2,10 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '@environments/environment';
-import { AccessDataResponse, UserData } from '@core/models';
+import { AccessDataResponse } from '@core/models/access-data-response';
 import { IAuthService } from '@core/interfaces/auth.interface';
 import { Observable } from 'rxjs';
+import { UserService } from '@shared/services/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,13 @@ import { Observable } from 'rxjs';
 export class AuthService implements IAuthService {
   router = inject(Router);
   http = inject(HttpClient);
+  userService = inject(UserService);
   private readonly AUTH_KEY = 'authData';
   private readonly authUrl = environment.authUrl;
   private readonly redirectUri = environment.redirectUri;
   private readonly accountsSpotifyUrl = environment.accountsSpotifyUrl;
 
-  get authData(): UserData | null {
+  get authData(): AccessDataResponse | null {
     const authData = localStorage.getItem(this.AUTH_KEY);
     return authData ? JSON.parse(authData) : null;
   }
@@ -26,12 +28,16 @@ export class AuthService implements IAuthService {
     return !!this.authData?.access_token;
   }
 
-  login(data: UserData): void {
-    localStorage.setItem('user', JSON.stringify(data));
+  login(data: {display_name: string, password: string}): void {
+    this.userService.setUser(data);
     this.generateToken().subscribe({
       next: (response) => {
-        const userDataWithToken = { ...data, access_token: response.access_token };
-        localStorage.setItem(this.AUTH_KEY, JSON.stringify(userDataWithToken));
+        const authData = {
+          access_token: response.access_token,
+          token_type: 'tunescope',
+          created_at: new Date().getTime()
+        };
+        localStorage.setItem(this.AUTH_KEY, JSON.stringify(authData));
         this.router.navigate(['/home']);
       },
       error: (err) => { console.error('Erro ao gerar token:', err) }
@@ -65,6 +71,7 @@ export class AuthService implements IAuthService {
       `${this.accountsSpotifyUrl}api/token`, body.toString(), { headers }
     );
   }
+
   saveAuthData(data: AccessDataResponse): void {
     const authData = {
       access_token: data.access_token,
@@ -73,6 +80,7 @@ export class AuthService implements IAuthService {
       created_at: new Date().getTime()
     };
     localStorage.setItem(this.AUTH_KEY, JSON.stringify(authData));
+    this.userService.setSpotifyUser();
     this.router.navigate(['/home']);
   }
 
@@ -83,6 +91,7 @@ export class AuthService implements IAuthService {
 
   logout(): void {
     localStorage.removeItem(this.AUTH_KEY);
+    this.userService.clearUser();
     this.router.navigate(['/login']);
   }
 }
