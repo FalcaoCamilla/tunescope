@@ -77,7 +77,8 @@ export class AuthService implements IAuthService {
       access_token: data.access_token,
       token_type: data.token_type,
       expires_in: data.expires_in,
-      created_at: new Date().getTime()
+      created_at: new Date().getTime(),
+      login_type: 'spotify'
     };
     localStorage.setItem(this.AUTH_KEY, JSON.stringify(authData));
     this.userService.setSpotifyUser();

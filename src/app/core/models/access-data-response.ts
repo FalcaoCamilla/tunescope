@@ -3,4 +3,5 @@ export type AccessDataResponse = {
   token_type: string;
   expires_in: string;
   created_at: number;
+  login_type?: string;
 };
